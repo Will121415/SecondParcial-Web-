@@ -6,7 +6,7 @@
         <div class="form-group col-md-7">
             <label for="inputID">Numero de Documento</label>
             <input type="text" class="form-control"  formControlName="identification" placeholder="Identificacion"
-                [ngClass]="{'is-invalid': controlStudent.identification.errors}">
+                [ngClass]="{'is-invalid': (controlStudent.identification.errors && controlStudent.identification.touched)}">
 
             <div *ngIf="controlStudent.identification.errors" class="invalid-feedback">
                 <div *ngIf="controlStudent.identification.errors.required">se requiere la identificacion</div>
@@ -32,7 +32,7 @@
             <div class="form-group col-md-4">
                 <label for="inputID">Codigo vacuna</label>
                 <input type="text" class="form-control" formControlName="idVaccine" placeholder="Codigo"
-                    [ngClass]="{'is-invalid': controlVacinne.idVaccine.errors}">
+                    [ngClass]="{'is-invalid': (controlVacinne.idVaccine.errors && controlVacinne.idVaccine.touched)}">
 
                 <div *ngIf="controlVacinne.idVaccine.errors" class="invalid-feedback">
                     <div *ngIf="controlVacinne.idVaccine.errors.required">se requiere el codigo</div>
@@ -42,7 +42,7 @@
             <div class="form-group col-md-4">
                 <label for="inputState">Tipo de vacuna</label>
                 <select id="inputState" class="custom-select" formControlName="vaccineType"
-                    [ngClass]="{'is-invalid': controlVacinne.vaccineType.errors}">
+                    [ngClass]="{'is-invalid': (controlVacinne.vaccineType.errors && controlVacinne.vaccineType.touched)}">
                     <option>seleccionar...</option>
                     <option>Haemophilus influenza tipo B</option>
                     <option>Tdpa</option>
@@ -63,7 +63,7 @@
             <div class="form-group col-md-4">
                 <label>Fecha de vacunacion</label>
                 <input type="date" class="form-control" formControlName="dateOfVaccine"
-                    [ngClass]="{'is-invalid': controlVacinne.dateOfVaccine.errors}">
+                    [ngClass]="{'is-invalid': (controlVacinne.dateOfVaccine.errors && controlVacinne.dateOfVaccine.touched)}">
                 <div *ngIf="controlVacinne.dateOfVaccine.errors" class="invalid-feedback">
                     <div *ngIf="controlVacinne.dateOfVaccine.errors.required">se requiere la fecha de vacunacion</div>
                 </div>

@@ -25,4 +25,11 @@ export class VaccineService {
             catchError(this.handleErrorService.handleError<Vaccine>('Error al guardar la vacuna', null))
  );
  }
+
+ get(): Observable<Vaccine[]> {
+   return this.http.get<Vaccine[]>(this.baseUrl + 'api/Vaccine').
+     pipe(tap(_ => this.handleErrorService.log('Vacuna consultada')),
+     catchError(this.handleErrorService.handleError<Vaccine[]>('Error al consultar las vacunas', null))
+ );
+ }
 }

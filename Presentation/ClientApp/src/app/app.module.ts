@@ -9,11 +9,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './layout/layout.component';
 import { NavMenuModule } from './nav-menu/nav-menu.module';
 import { HomeModule } from './home/home.module';
+import { ConsultVaccineModule } from './consult-vaccine/consult-vaccine.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent
+    LayoutComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -21,7 +22,8 @@ import { HomeModule } from './home/home.module';
     FormsModule,
     AppRoutingModule,
     NavMenuModule,
-    HomeModule
+    HomeModule,
+    ConsultVaccineModule
   ],
   providers: [],
   bootstrap: [AppComponent]

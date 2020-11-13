@@ -1,0 +1,33 @@
+<div class="card mt-5 mb-5 backColor">
+    <h5 class="card-header colorTop">Listto De Vacunas</h5>
+    <nav class="navbar navbar-light mt-2">
+        <a class="navbar-brand">
+            <input *ngIf="vaccines !== null" class="form-control mx-5" type="search" name="searchText"
+                [(ngModel)]="searchText" placeholder="Buscar producto" aria-label="Search">
+        </a>
+    </nav>
+
+    <div class="m-5 colorTable">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Tipo De Vacuna</th>
+                        <th scope="col">Fecha de vacunacion</th>
+                        <th scope="col">Edad</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let vaccine of vaccines | filterVaccine: searchText">
+                    <tr>
+                        <th scope="row">{{ vaccine.idVaccine }}</th>
+                        <td>{{ vaccine.vaccineType }}</td>
+                        <td>{{ vaccine.dateOfVaccine }}</td>
+                        <td>{{ vaccine.age }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

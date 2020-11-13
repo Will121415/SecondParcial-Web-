@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CounterComponent } from './counter.component';
+import { ConsultVaccineComponent } from './components/consult-vaccine/consult-vaccine.component';
 
 
 const routes: Routes = [
-  { path: '', component: CounterComponent }
+  { path: '', component: ConsultVaccineComponent }
 ];
 
 @NgModule({
@@ -13,6 +13,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule
   ],
-  exports: [RouterModule]
+  exports: [
+    RouterModule
+  ]
 })
-export class CounterRoutingModule { }
+export class ConsultVaccineRoutingModule { }

@@ -46,5 +46,17 @@ namespace Presentation.Controllers
             };
             return vaccine;
         }
+
+         // GET: api/Person
+        [HttpGet]
+        public ActionResult<IEnumerable<VaccineViewModel>> GetConsult()
+        {
+            var response = vaccineService.GetConsult();
+
+            if(response.Error) BadRequest(response.Message);
+            var vaccines  = response.Vaccines.Select(v => new VaccineViewModel(v));
+
+            return Ok(vaccines);
+        }
     }
 }
