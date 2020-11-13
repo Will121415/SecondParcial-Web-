@@ -1,3 +1,4 @@
+using System.Security.Principal;
 namespace Presentation.Models
 {
     public class StudentImputModel
@@ -15,7 +16,13 @@ namespace Presentation.Models
         public StudentViewModel() {}
 
         public StudentViewModel(Student student) {
-
+            
+            DocumentType = student.DocumentType;
+            Identification = student.Identification;
+            Name = student.Name;
+            DateOfBorn = student.DateOfBorn;
+            NameInstitute = student.NameInstitute;
+            NameGuardian = student.NameGuardian;
         }
 
     }

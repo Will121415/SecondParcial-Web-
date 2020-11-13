@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from 'src/app/Models/student.model';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { StudentService } from 'src/app/services/student.service';
 
 @Component({
   selector: 'app-student',
@@ -12,7 +13,7 @@ export class StudentComponent implements OnInit {
   student: Student;
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {this.buildForm(); }
+  constructor(private formBuilder: FormBuilder, private studentService: StudentService) {this.buildForm(); }
 
   ngOnInit() {
   }
@@ -48,7 +49,11 @@ export class StudentComponent implements OnInit {
   }
 
   add() {
-    console.log(this.formGroup.value);
+    this.studentService.post(this.student).subscribe(s => {
+      if (s != null) {
+        alert('Estudiante creado!');
+        this.student = s;
+      }
+    });
   }
-
 }
