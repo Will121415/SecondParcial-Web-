@@ -4,6 +4,9 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { Student } from 'src/app/Models/student.model';
 import { StudentService } from 'src/app/services/student.service';
 import { VaccineService } from 'src/app/services/vaccine.service';
+import { AlertDialogComponent } from 'src/app/@base/alert-dialog/components/alert-dialog/alert-dialog.component';
+import { MatDialog } from '@angular/material';
+import { NullAstVisitor } from '@angular/compiler';
 
 @Component({
   selector: 'app-vaccine',
@@ -20,7 +23,9 @@ export class VaccineComponent implements OnInit {
   constructor(
     private vaccineService: VaccineService,
     private studentService: StudentService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
+
     ) { this.buildForm(); }
 
   ngOnInit() {
@@ -44,8 +49,8 @@ export class VaccineComponent implements OnInit {
     this.student.identification = '';
     this.formGroupStudent = this.formBuilder.group({
       identification: [this.student.identification, Validators.required],
-      name: [this.student.name],
-      nameInstitute: [this.student.nameInstitute],
+      name: [{value: this.student.name, disabled: true}],
+      nameInstitute: [{value: this.student.nameInstitute, disabled: true}, Validators.required]
     });
 
   }
@@ -66,19 +71,19 @@ export class VaccineComponent implements OnInit {
   add() {
     this.vaccine = this.formGroupVaccine.value;
     this.vaccine.idStudent = this.idStudent;
+
     const dateOfBorn = new Date(this.student.dateOfBorn);
     const dateOfVaccine = new Date(this.vaccine.dateOfVaccine);
+    const timeDiff = Math.abs(dateOfVaccine.getTime() - dateOfBorn.getTime());
 
-    console.log(this.student.dateOfBorn);
-    console.log(this.vaccine.dateOfVaccine);
-
-
-      const timeDiff = Math.abs(dateOfVaccine.getTime() - dateOfBorn.getTime());
-      this.vaccine.age  = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365).toString();
+    this.vaccine.age  = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365).toString();
     console.log(this.vaccine);
     this.vaccineService.post(this.vaccine).subscribe(v => {
       if (v != null) {
-        alert('Vacuna Registrada...!');
+        this.dialog.open(AlertDialogComponent, {
+          width: '250px',
+          data: 'Vacuna registrada...!',
+        });
       }
       console.log(v);
     });
@@ -86,17 +91,28 @@ export class VaccineComponent implements OnInit {
 
   shared() {
     this.idStudent = this.formGroupStudent.value.identification;
+
     this.studentService.getStudent(this.idStudent).subscribe(s => {
-      if (s != null) {
-        this.formGroupStudent.get('name').setValue(s.name);
-        this.formGroupStudent.get('nameInstitute').setValue(s.nameInstitute);
-        this.formGroupStudent.get('nameInstitute').setValue(s.nameInstitute);
+      if (s.identification !== undefined) {
+        this.dialog.open(AlertDialogComponent, {
+          width: '250px',
+          data: 'Estudiante encontrado...!',
+        });
+        this.fillFields(s);
         this.student = s;
-        console.log(this.student);
       } else {
-        alert('El estudiante no existe..!');
+        this.dialog.open(AlertDialogComponent, {
+          width: '250px',
+          data: 'Estudiante NO encontrado...!',
+        });
       }
     });
+  }
+
+  fillFields(s: Student) {
+    this.formGroupStudent.get('name').setValue(s.name);
+    this.formGroupStudent.get('nameInstitute').setValue(s.nameInstitute);
+    this.formGroupStudent.get('nameInstitute').setValue(s.nameInstitute);
   }
 
 }

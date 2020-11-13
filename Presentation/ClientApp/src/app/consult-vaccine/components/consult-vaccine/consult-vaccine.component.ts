@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { AlertDialogComponent } from 'src/app/@base/alert-dialog/components/alert-dialog/alert-dialog.component';
 import { Vaccine } from 'src/app/Models/vaccine.model';
 import { VaccineService } from 'src/app/services/vaccine.service';
 
@@ -11,10 +13,30 @@ export class ConsultVaccineComponent implements OnInit {
 
   vaccines: Vaccine[];
   searchText: string;
-  constructor(private vaccineService: VaccineService) { }
+  constructor(
+    private vaccineService: VaccineService,
+    public dialog: MatDialog
+    ) { }
 
   ngOnInit() {
-    this.vaccineService.get().subscribe(result => {this.vaccines = result; });
+    this.get();
+  }
+
+  get() {
+    this.vaccineService.get().subscribe(result => {
+      if (result != null) {
+        this.dialog.open(AlertDialogComponent, {
+          width: '250px',
+          data: 'Vacunas consultadas...!',
+        });
+        this.vaccines = result;
+      } else {
+        this.dialog.open(AlertDialogComponent, {
+          width: '250px',
+          data: 'No se encontraron vacunas registradas...!',
+        });
+      }
+    });
   }
 
 }

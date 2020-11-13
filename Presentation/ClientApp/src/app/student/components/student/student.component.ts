@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from 'src/app/Models/student.model';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { StudentService } from 'src/app/services/student.service';
+import { MatDialog } from '@angular/material';
+import { AlertDialogComponent } from 'src/app/@base/alert-dialog/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-student',
@@ -13,7 +15,11 @@ export class StudentComponent implements OnInit {
   student: Student;
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private studentService: StudentService) {this.buildForm(); }
+  constructor(
+    private formBuilder: FormBuilder,
+    private studentService: StudentService,
+    public dialog: MatDialog
+    ) {this.buildForm(); }
 
   ngOnInit() {
   }
@@ -57,7 +63,10 @@ export class StudentComponent implements OnInit {
     this.student = this.formGroup.value;
     this.studentService.post(this.student).subscribe(s => {
       if (s != null) {
-        alert('Estudiante creado!');
+        this.dialog.open(AlertDialogComponent, {
+          width: '250px',
+          data: 'Estudiante registrado...!',
+        });
         this.student = s;
       }
     });

@@ -10,6 +10,10 @@ import { LayoutComponent } from './layout/layout.component';
 import { NavMenuModule } from './nav-menu/nav-menu.module';
 import { HomeModule } from './home/home.module';
 import { ConsultVaccineModule } from './consult-vaccine/consult-vaccine.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AlertDialogModule } from './@base/alert-dialog/alert-dialog.module';
+import { AlertDialogComponent } from './@base/alert-dialog/components/alert-dialog/alert-dialog.component';
+import { FooterModule } from './footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -23,8 +27,12 @@ import { ConsultVaccineModule } from './consult-vaccine/consult-vaccine.module';
     AppRoutingModule,
     NavMenuModule,
     HomeModule,
-    ConsultVaccineModule
+    ConsultVaccineModule,
+    NoopAnimationsModule,
+    AlertDialogModule,
+    FooterModule
   ],
+  entryComponents: [AlertDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
