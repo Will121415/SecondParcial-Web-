@@ -23,6 +23,14 @@ const routes: Routes = [
         path: 'counter',
         loadChildren: () => import('./counter/counter.module').then(m => m.CounterModule)
       },
+      {
+        path: 'student/register',
+        loadChildren: () => import('./student/student.module').then(m => m.StudentModule)
+      },
+      {
+        path: 'vaccine/register',
+        loadChildren: () => import('./vaccine/vaccine.module').then(m => m.VaccineModule)
+      },
     ]
   }];
 
