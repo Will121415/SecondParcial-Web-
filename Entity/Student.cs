@@ -8,8 +8,8 @@ namespace Entity
     public class Student
     {
         [Key]
-        public string DocumentType { get; set; }
         public string Identification { get; set; }
+        public string DocumentType { get; set; }
         public string Name { get; set; }
         public string DateOfBorn { get; set; }
         public string NameInstitute { get; set; }

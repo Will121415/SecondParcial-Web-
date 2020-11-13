@@ -24,4 +24,11 @@ export class StudentService {
               catchError(this.handleErrorService.handleError<Student>('Error al guardar el estudiante', null))
    );
    }
+
+   getStudent(identification: string): Observable<Student> {
+    return this.http.get<Student>(this.baseUrl + 'api/Student/' + identification)
+    .pipe(tap(_ => this.handleErrorService.log('Estudiante encontrado')),
+    catchError(this.handleErrorService.handleError<Student>('Error al consultar estudiante', new Student()))
+    );
+  }
 }

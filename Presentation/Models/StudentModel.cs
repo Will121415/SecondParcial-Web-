@@ -1,4 +1,5 @@
 using System.Security.Principal;
+using Entity;
 namespace Presentation.Models
 {
     public class StudentImputModel

@@ -41,6 +41,20 @@ namespace BLL
             }
         }
 
+        public ServiceResponseStudent SearchById(string identification)
+        {
+            try 
+            {
+                Student student = context.Students.Find(identification);
+                return new ServiceResponseStudent(student);
+            }
+            catch (Exception e)
+            {
+                
+                return new ServiceResponseStudent($"Error de la Aplicacion: {e.Message}");
+            }
+        }
+
 
 
     }

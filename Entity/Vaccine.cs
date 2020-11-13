@@ -7,6 +7,7 @@ namespace Entity
     public class Vaccine
     {
         [Key]
+        public string IdVaccine { get; set; }
         public string VaccineType { get; set; }
         public string DateOfVaccine { get; set; }
         public string Age { get; set; }

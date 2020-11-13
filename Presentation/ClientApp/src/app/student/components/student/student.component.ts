@@ -49,6 +49,12 @@ export class StudentComponent implements OnInit {
   }
 
   add() {
+
+    if (this.formGroup.invalid) {
+      return;
+    }
+
+    this.student = this.formGroup.value;
     this.studentService.post(this.student).subscribe(s => {
       if (s != null) {
         alert('Estudiante creado!');

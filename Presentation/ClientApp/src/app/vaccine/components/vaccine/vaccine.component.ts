@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Vaccine } from 'src/app/Models/vaccine.model';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Student } from 'src/app/Models/student.model';
+import { StudentService } from 'src/app/services/student.service';
 
 @Component({
   selector: 'app-vaccine',
@@ -14,7 +15,10 @@ export class VaccineComponent implements OnInit {
   formGroupVaccine: FormGroup;
   formGroupStudent: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { this.buildForm(); }
+  constructor(
+    private studentService: StudentService,
+    private formBuilder: FormBuilder
+    ) { this.buildForm(); }
 
   ngOnInit() {
   }
@@ -35,6 +39,8 @@ export class VaccineComponent implements OnInit {
     this.student.identification = '';
     this.formGroupStudent = this.formBuilder.group({
       identification: [this.student.identification, Validators.required],
+      name: [this.student.name],
+      nameInstitute: [this.student.nameInstitute],
     });
 
   }
@@ -54,6 +60,18 @@ export class VaccineComponent implements OnInit {
 
   add() {
     console.log('Registrada');
+  }
+
+  shared() {
+    const id = this.formGroupStudent.value.identification;
+    this.studentService.getStudent(id).subscribe(s => {
+      if (s != null) {
+        this.formGroupStudent.get('name').setValue(s.name);
+        this.formGroupStudent.get('nameInstitute').setValue(s.nameInstitute);
+      } else {
+        alert('El estudiante no existe..!');
+      }
+    });
   }
 
 }
