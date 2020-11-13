@@ -1,34 +1,38 @@
 <div class="card  mt-5 mb-5 backColor">
     <h5 class="card-header colorTop">Registro de Vacunas</h5>
-    <form class="m-5" [formGroup]="formGroup">
-        <div class="form-row">
 
-            <div class="form-group col-md-6">
-                <label for="inputID">Numero de Documento</label>
-                <input type="text" class="form-control" formControlName="identification" placeholder="Identificacion"
-                    [ngClass]="{'is-invalid': control.identification.errors}">
+    <form [formGroup]="formGroupStudent" class="mt-5">
+        
+        <div class="form-group col-md-7">
+            <label for="inputID">Numero de Documento</label>
+            <input type="text" class="form-control" formControlName="identification" placeholder="Identificacion"
+                [ngClass]="{'is-invalid': controlStudent.identification.errors}">
 
-                <div *ngIf="control.identification.errors" class="invalid-feedback">
-                    <div *ngIf="control.identification.errors.required">se requiere la identificacion</div>
-                </div>
+            <div *ngIf="controlStudent.identification.errors" class="invalid-feedback">
+                <div *ngIf="controlStudent.identification.errors.required">se requiere la identificacion</div>
             </div>
-
-                <button type="button" class="btn btn-primary">Buscar</button>
-
-            <div class="form-group col-md-6">
-                <label for="inputID">Nombre</label>
-                <input type="text" class="form-control" [(ngModel)]="student.name" disabled />
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputID">Nombre del instituto</label>
-                <input type="text" class="form-control" [(ngModel)]="student.nameInstitute" disabled />
-            </div>
+            <br>
             
+            <button type="button" class="btn btn-primary" [disabled]="formGroupStudent.invalid">Buscar</button>
+        </div>
+        
+
+        <div class="form-group col-md-6">
+            <label for="inputID">Nombre</label>
+            <input type="text" class="form-control" formControlName="name" disabled />
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputID">Nombre del instituto</label>
+            <input type="text" class="form-control"formControlName="nameInstitute" disabled />
+        </div>
+    </form>
+    <form class="m-5" [formGroup]="formGroupVaccine">
+        <div class="form-row">
 
             <div class="form-group col-md-4">
                 <label for="inputState">Tipo de vacuna</label>
                 <select id="inputState" class="custom-select" formControlName="vaccineType"
-                    [ngClass]="{'is-invalid': control.vaccineType.errors}">
+                    [ngClass]="{'is-invalid': controlVacinne.vaccineType.errors}">
                     <option>seleccionar...</option>
                     <option>Haemophilus influenza tipo B</option>
                     <option>Tdpa</option>
@@ -39,9 +43,9 @@
 
                 </select>
 
-                <div *ngIf="control.vaccineType.errors" class="invalid-feedback">
-                    <div *ngIf="control.vaccineType.errors.validatevaccineType">
-                        {{ control.vaccineType.errors.messagedovaccineType }}</div>
+                <div *ngIf="controlVacinne.vaccineType.errors" class="invalid-feedback">
+                    <div *ngIf="controlVacinne.vaccineType.errors.validatevaccineType">
+                        {{ controlVacinne.vaccineType.errors.messagedovaccineType }}</div>
                 </div>
             </div>
 
@@ -49,15 +53,15 @@
             <div class="form-group col-md-4">
                 <label>Fecha de vacunacion</label>
                 <input type="date" class="form-control" formControlName="dateOfVaccine"
-                    [ngClass]="{'is-invalid': control.dateOfVaccine.errors}">
-                <div *ngIf="control.dateOfVaccine.errors" class="invalid-feedback">
-                    <div *ngIf="control.dateOfVaccine.errors.required">se requiere la fecha de vacunacion</div>
+                    [ngClass]="{'is-invalid': controlVacinne.dateOfVaccine.errors}">
+                <div *ngIf="controlVacinne.dateOfVaccine.errors" class="invalid-feedback">
+                    <div *ngIf="controlVacinne.dateOfVaccine.errors.required">se requiere la fecha de vacunacion</div>
                 </div>
             </div>
         </div>
 
 
         <button type="button" id="btn-style" class="btn btn-primary" (click)="add()"
-            [disabled]="formGroup.invalid">Registrar</button>
+            [disabled]="formGroupVaccine.invalid">Registrar</button>
     </form>
 </div>

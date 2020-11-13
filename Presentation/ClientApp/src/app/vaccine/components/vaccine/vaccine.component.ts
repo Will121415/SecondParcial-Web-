@@ -11,7 +11,8 @@ import { Student } from 'src/app/Models/student.model';
 export class VaccineComponent implements OnInit {
   vaccine: Vaccine;
   student: Student;
-  formGroup: FormGroup;
+  formGroupVaccine: FormGroup;
+  formGroupStudent: FormGroup;
 
   constructor(private formBuilder: FormBuilder) { this.buildForm(); }
 
@@ -25,12 +26,15 @@ export class VaccineComponent implements OnInit {
     this.vaccine.vaccineType = 'seleccionar...';
     this.vaccine.dateOfVaccine = '';
 
-    this.student.identification = '';
 
-    this.formGroup = this.formBuilder.group({
+    this.formGroupVaccine = this.formBuilder.group({
       vaccineType: [this.vaccine.vaccineType, [Validators.required, this.validateVaccineType]],
       dateOfVaccine: [this.vaccine.dateOfVaccine, Validators.required],
-      identification: [this.student.identification, Validators.required]
+    });
+
+    this.student.identification = '';
+    this.formGroupStudent = this.formBuilder.group({
+      identification: [this.student.identification, Validators.required],
     });
 
   }
@@ -40,12 +44,16 @@ export class VaccineComponent implements OnInit {
     if (vaccineType !== 'seleccionar...' ) { return null; }
     return  {validatevaccineType: true, messagedovaccineType: 'debe seleccionar un tipo'};
   }
-  get control() {
-    return this.formGroup.controls;
+  get controlVacinne() {
+    return this.formGroupVaccine.controls;
+  }
+
+  get controlStudent() {
+    return this.formGroupStudent.controls;
   }
 
   add() {
-    console.log(this.formGroup.value);
+    console.log('Registrada');
   }
 
 }
