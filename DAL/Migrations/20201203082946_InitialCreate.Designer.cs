@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(SecondParcialContext))]
-    [Migration("20201113063939_InitialCreate")]
+    [Migration("20201203082946_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,25 @@ namespace DAL.Migrations
                     b.HasKey("Identification");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("Entity.User", b =>
+                {
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserName");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Entity.Vaccine", b =>

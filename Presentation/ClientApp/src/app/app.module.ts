@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertDialogModule } from './@base/alert-dialog/alert-dialog.module';
 import { AlertDialogComponent } from './@base/alert-dialog/components/alert-dialog/alert-dialog.component';
 import { FooterModule } from './footer/footer.module';
+import { JwtInterceptor } from './services/jwt.interceptor';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -30,10 +32,14 @@ import { FooterModule } from './footer/footer.module';
     ConsultVaccineModule,
     NoopAnimationsModule,
     AlertDialogModule,
-    FooterModule
+    FooterModule,
+    LoginModule
   ],
   entryComponents: [AlertDialogComponent],
-  providers: [],
+  providers:
+    [
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

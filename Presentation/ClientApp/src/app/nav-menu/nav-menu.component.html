@@ -35,6 +35,16 @@
               >Consultas</a
             >
           </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" 
+              > <button (click)="logout()">logout</button> </a
+            >
+          </li>
+          <li *ngIf="(currentUser$ | async ) as user" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" 
+              >{{ user?.userName}}</a
+            >
+          </li>
         </ul>
       </div>
     </div>

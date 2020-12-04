@@ -13,6 +13,7 @@ export class ConsultVaccineComponent implements OnInit {
 
   vaccines: Vaccine[];
   searchText: string;
+  countStudent: number;
   constructor(
     private vaccineService: VaccineService,
     public dialog: MatDialog
@@ -30,6 +31,7 @@ export class ConsultVaccineComponent implements OnInit {
           data: 'Vacunas consultadas...!',
         });
         this.vaccines = result;
+        this.countStudent = this.vaccines.length;
       } else {
         this.dialog.open(AlertDialogComponent, {
           width: '250px',

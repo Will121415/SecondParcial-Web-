@@ -29,6 +29,10 @@ const routes: Routes = [
         path: 'consult',
         loadChildren: () => import('./consult-vaccine/consult-vaccine.module').then(m => m.ConsultVaccineModule)
       },
+      {
+        path: 'login',
+        loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+      },
     ]
   }];
 

@@ -7,7 +7,9 @@ namespace DAL
     {
         public SecondParcialContext(DbContextOptions options): base(options){}
         public DbSet<Vaccine> Vaccines { get; set; }
-         public DbSet<Student> Students { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<User> Users { get; set; }
+
         
     }
 }

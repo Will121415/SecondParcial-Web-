@@ -3,7 +3,7 @@
     <nav class="navbar navbar-light mt-2">
         <a class="navbar-brand">
             <input *ngIf="vaccines !== null" class="form-control mx-5" type="search" name="searchText"
-                [(ngModel)]="searchText" placeholder="Buscar producto" aria-label="Search">
+                [(ngModel)]="searchText" placeholder="Buscar vacuna" aria-label="Search">
         </a>
     </nav>
 
@@ -16,6 +16,7 @@
                         <th scope="col">Tipo De Vacuna</th>
                         <th scope="col">Fecha de vacunacion</th>
                         <th scope="col">Edad</th>
+                        <th scope="col">Id Estudiante</th>
                     </tr>
                 </thead>
                 <tbody *ngFor="let vaccine of vaccines | filterVaccine: searchText">
@@ -24,10 +25,14 @@
                         <td>{{ vaccine.vaccineType }}</td>
                         <td>{{ vaccine.dateOfVaccine }}</td>
                         <td>{{ vaccine.age }}</td>
+                        <td>{{ vaccine.idStudent }}</td>
                     </tr>
                 </tbody>
             </table>
+            <br>
+            <h3>Estudiantes Vacunados: {{ countStudent }}</h3>
         </div>
     </div>
+   
 
 </div>
